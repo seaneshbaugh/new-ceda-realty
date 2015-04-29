@@ -6,6 +6,8 @@ defmodule CedaRealty.Router do
     plug :fetch_session
     plug :fetch_flash
     plug :protect_from_forgery
+    plug CedaRealty.Plugs.RememberMePlug
+    plug CedaRealty.Plugs.SetCurrentUser
   end
 
   pipeline :api do
@@ -16,6 +18,16 @@ defmodule CedaRealty.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+
+    get "/login", SessionController, :new
+    post "/login", SessionController, :create
+    delete "/logout", SessionController, :delete
+  end
+
+  scope "/admin", CedaRealty.Admin, as: :admin do
+    pipe_through :browser # Use the default browser stack
+
+    resources "/users", UserController
   end
 
   # Other scopes may use custom stacks.

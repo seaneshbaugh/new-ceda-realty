@@ -1,0 +1,72 @@
+<h2>Show user</h2>
+
+<ul>
+
+  <li>
+    <strong>Username:</strong>
+    <%= @user.username %>
+  </li>
+
+  <li>
+    <strong>Email:</strong>
+    <%= @user.email %>
+  </li>
+
+  <li>
+    <strong>EncryptedPassword:</strong>
+    <%= @user.encrypted_password %>
+  </li>
+
+  <li>
+    <strong>Role:</strong>
+    <%= @user.role %>
+  </li>
+
+  <li>
+    <strong>ResetPasswordToken:</strong>
+    <%= @user.reset_password_token %>
+  </li>
+
+  <li>
+    <strong>ResetPasswordSentAt:</strong>
+    <%= @user.reset_password_sent_at %>
+  </li>
+
+  <li>
+    <strong>RememberCreatedAt:</strong>
+    <%= @user.remember_created_at %>
+  </li>
+
+  <li>
+    <strong>SignInCount:</strong>
+    <%= @user.sign_in_count %>
+  </li>
+
+  <li>
+    <strong>CurrentSignInAt:</strong>
+    <%= @user.current_sign_in_at %>
+  </li>
+
+  <li>
+    <strong>LastSignInAt:</strong>
+    <%= @user.last_sign_in_at %>
+  </li>
+
+  <li>
+    <strong>CurrentSignInIp:</strong>
+    <%= @user.current_sign_in_ip %>
+  </li>
+
+  <li>
+    <strong>LastSignInIp:</strong>
+    <%= @user.last_sign_in_ip %>
+  </li>
+
+  <li>
+    <strong>Timestamps:</strong>
+    <%= @user.timestamps %>
+  </li>
+
+</ul>
+
+<%= link "Back", to: admin_user_path(@conn, :index) %>

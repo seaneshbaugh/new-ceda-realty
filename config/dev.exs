@@ -29,6 +29,6 @@ config :logger, :console, format: "[$level] $message\n"
 # Configure your database
 config :ceda_realty, CedaRealty.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: "sean_eshbaugh",
+  password: "",
   database: "ceda_realty_dev"
