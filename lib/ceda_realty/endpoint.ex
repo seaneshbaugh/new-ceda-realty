@@ -29,5 +29,12 @@ defmodule CedaRealty.Endpoint do
     signing_salt: "Jf/bnSGK",
     encryption_salt: "RE8DI/hV"
 
+  plug CedaRealty.Plugs.RememberMePlug,
+    key: config[:remember_me][:key],
+    encryption_salt: config[:remember_me][:encryption_salt],
+    signing_salt: config[:remember_me][:signing_salt]
+
+  plug CedaRealty.Plugs.SetCurrentUser
+
   plug :router, CedaRealty.Router
 end

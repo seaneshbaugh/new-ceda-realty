@@ -13,11 +13,9 @@ defmodule CedaRealty.SessionController do
 
     password = params["user"]["password"]
 
-    query = from user in CedaRealty.User, where: user.username == ^username
+    user = CedaRealty.Repo.one(from user in CedaRealty.user, where: user.username == ^username)
 
-    user = CedaRealty.Repo.all(query) |> List.first
-
-    if !(is_nil user) do
+    if user do
       if checkpw(password, user.encrypted_password) do
         conn
         |> fetch_session
@@ -44,7 +42,7 @@ defmodule CedaRealty.SessionController do
       conn
       |> fetch_session
       |> put_session(:current_user, nil)
-      |> delete_resp_cookie("remember_me_token")
+      |> delete_resp_cookie(CedaRealty.Endpoint.config(:remember_me, [])[:key])
       |> put_flash(:info, "Successfully logged out.")
       |> redirect(to: session_path(conn, :new))
     else
@@ -56,34 +54,18 @@ defmodule CedaRealty.SessionController do
 
   defp remember_me(conn, params) do
     if params["user"]["remember_me"] do
-      encryption_salt = "VzQ0Tr91lVVJ2yPF"
+      key = CedaRealty.Endpoint.config(:remember_me, [])[:key]
 
-      signing_salt = "deW9u3bUcbyz6fik"
+      signing_salt = CedaRealty.Endpoint.config(:remember_me, [])[:signing_salt]
 
-      iterations = 1000
+      encryption_salt = CedaRealty.Endpoint.config(:remember_me,[])[:encryption_salt]
 
-      length = 32
-
-      digest = :sha256
-
-      key_opts = [iterations: iterations,
-                  length: length,
-                  digest: digest,
-                  cache: Plug.Keys]
-
-      binary = :erlang.term_to_binary(get_session(conn, :current_user).id)
-
-      value = Plug.Crypto.MessageEncryptor.encrypt_and_sign(binary, derive(conn, encryption_salt, key_opts), derive(conn, signing_salt, key_opts))
+      max_age = 60 * 60 * 24 * 365 * 10
 
       conn
-      |> Plug.Conn.put_resp_cookie("remember_me_token", value, [max_age: 60 * 60 * 24 * 365 * 10])
+      |> CedaRealty.Plugs.SignedCookie.put_signed_resp_cookie(key, get_session(conn, :current_user).id, signing_salt, [encryption_salt: encryption_salt, max_age: max_age])
     else
       conn
     end
-  end
-
-  defp derive(conn, key, key_opts) do
-    conn.secret_key_base
-    |> Plug.Crypto.KeyGenerator.generate(key, key_opts)
   end
 end

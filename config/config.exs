@@ -12,7 +12,10 @@ config :ceda_realty, CedaRealty.Endpoint,
   secret_key_base: "YhsC4/1tATgxx23fcni1vr026uJQ0ZlLbmykbHQA5wq4YbgPdXxScus3fyhTGXtw",
   debug_errors: false,
   pubsub: [name: CedaRealty.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+           adapter: Phoenix.PubSub.PG2],
+  remember_me: [key: "_remember_me_token",
+                encryption_salt: "VzQ0Tr91lVVJ2yPF",
+                signing_salt: "deW9u3bUcbyz6fik"]
 
 # Configures Elixir's Logger
 config :logger, :console,

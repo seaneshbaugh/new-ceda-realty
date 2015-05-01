@@ -6,8 +6,6 @@ defmodule CedaRealty.Router do
     plug :fetch_session
     plug :fetch_flash
     plug :protect_from_forgery
-    plug CedaRealty.Plugs.RememberMePlug
-    plug CedaRealty.Plugs.SetCurrentUser
   end
 
   pipeline :api do
