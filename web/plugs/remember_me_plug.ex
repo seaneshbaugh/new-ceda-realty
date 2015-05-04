@@ -13,20 +13,29 @@ defmodule CedaRealty.Plugs.RememberMePlug do
   end
 
   def call(conn, config) do
-    conn = fetch_session(conn) |> fetch_cookies
+    conn
+    |> fetch_session
+    |> set_current_user_from_cookie(config[:key], config[:signing_salt], [encryption_salt: config[:encryption_salt]])
+  end
 
-    {_, id} = CedaRealty.Plugs.SignedCookie.get_signed_cookie(conn, config[:key], config[:signing_salt], [encryption_salt: config[:encryption_salt]])
-
-    if id do
-      user = CedaRealty.Repo.one(from user in CedaRealty.User, where: user.id == ^id)
-
-      if user do
-        put_session(conn, :current_user, user)
-      else
-        conn
-      end
+  defp set_current_user_from_cookie(conn, key, signing_salt, opts) do
+    if !get_session(conn, :current_user) do
+      conn
+      |> fetch_cookies
+      |> set_current_user(CedaRealty.Plugs.SignedCookie.get_signed_cookie(conn, key, signing_salt, opts))
     else
       conn
     end
+  end
+
+  defp set_current_user(conn, {_, nil}) do
+    conn
+  end
+
+  defp set_current_user(conn, {_, id}) do
+    user = CedaRealty.Repo.one(from user in CedaRealty.User, where: user.id == ^id)
+
+    conn
+    |> put_session(:current_user, user)
   end
 end

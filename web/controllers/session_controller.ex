@@ -13,7 +13,7 @@ defmodule CedaRealty.SessionController do
 
     password = params["user"]["password"]
 
-    user = CedaRealty.Repo.one(from user in CedaRealty.user, where: user.username == ^username)
+    user = CedaRealty.Repo.one(from user in CedaRealty.User, where: user.username == ^username)
 
     if user do
       if checkpw(password, user.encrypted_password) do
