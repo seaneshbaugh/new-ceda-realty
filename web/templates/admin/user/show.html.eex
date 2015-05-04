@@ -13,60 +13,45 @@
   </li>
 
   <li>
-    <strong>EncryptedPassword:</strong>
-    <%= @user.encrypted_password %>
-  </li>
-
-  <li>
     <strong>Role:</strong>
     <%= @user.role %>
   </li>
 
   <li>
-    <strong>ResetPasswordToken:</strong>
-    <%= @user.reset_password_token %>
-  </li>
-
-  <li>
-    <strong>ResetPasswordSentAt:</strong>
-    <%= @user.reset_password_sent_at %>
-  </li>
-
-  <li>
-    <strong>RememberCreatedAt:</strong>
-    <%= @user.remember_created_at %>
-  </li>
-
-  <li>
-    <strong>SignInCount:</strong>
+    <strong>Sign In Count:</strong>
     <%= @user.sign_in_count %>
   </li>
 
   <li>
-    <strong>CurrentSignInAt:</strong>
+    <strong>Current Sign In At:</strong>
     <%= @user.current_sign_in_at %>
   </li>
 
   <li>
-    <strong>LastSignInAt:</strong>
+    <strong>Last Sign In At:</strong>
     <%= @user.last_sign_in_at %>
   </li>
 
   <li>
-    <strong>CurrentSignInIp:</strong>
+    <strong>Current Sign In IP:</strong>
     <%= @user.current_sign_in_ip %>
   </li>
 
   <li>
-    <strong>LastSignInIp:</strong>
+    <strong>Last Sign In IP:</strong>
     <%= @user.last_sign_in_ip %>
   </li>
 
   <li>
-    <strong>Timestamps:</strong>
-    <%= @user.timestamps %>
+    <strong>Inserted At:</strong>
+    <%= @user.inserted_at %>
+  </li>
+
+  <li>
+    <strong>Updated At:</strong>
+    <%= @user.updated_at %>
   </li>
 
 </ul>
 
-<%= link "Back", to: admin_user_path(@conn, :index) %>
+<%= link "Back", to: admin_user_path(@conn, :index) %> | <%= link "Edit", to: admin_user_path(@conn, :edit, @user) %>

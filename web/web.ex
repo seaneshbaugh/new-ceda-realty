@@ -25,6 +25,7 @@ defmodule CedaRealty.Web do
   def controller do
     quote do
       use Phoenix.Controller
+      use Canary
 
       # Alias the data repository and import query/model functions
       alias CedaRealty.Repo

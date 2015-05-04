@@ -1,4 +1,6 @@
-%{"comeonin": {:hex, :comeonin, "0.8.0"},
+%{"canada": {:hex, :canada, "1.0.0"},
+  "canary": {:hex, :canary, "0.4.0"},
+  "comeonin": {:hex, :comeonin, "0.8.0"},
   "cowboy": {:hex, :cowboy, "1.0.0"},
   "cowlib": {:hex, :cowlib, "1.0.1"},
   "decimal": {:hex, :decimal, "1.1.0"},

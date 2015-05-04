@@ -5,12 +5,12 @@ defmodule CedaRealty.Admin.UserController do
 
   plug CedaRealty.Plugs.RequireAuthentication
   plug :scrub_params, "user" when action in [:create, :update]
+  plug :load_and_authorize_resource, model: User
+  plug CedaRealty.Plugs.RequireAuthorization
   plug :action
 
   def index(conn, _params) do
-    users = Repo.all(User)
-
-    render conn, "index.html", users: users
+    render conn, "index.html", users: conn.assigns.loaded_resource
   end
 
   def new(conn, _params) do
@@ -34,13 +34,11 @@ defmodule CedaRealty.Admin.UserController do
   end
 
   def show(conn, %{"id" => id}) do
-    user = Repo.get(User, id)
-
-    render conn, "show.html", user: user
+    render conn, "show.html", user: conn.assigns.loaded_resource
   end
 
   def edit(conn, %{"id" => id}) do
-    user = Repo.get(User, id)
+    user = conn.assigns.loaded_resource
 
     changeset = User.changeset(user, :update)
 
@@ -48,7 +46,7 @@ defmodule CedaRealty.Admin.UserController do
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do
-    user = Repo.get(User, id)
+    user = conn.assigns.loaded_resource
 
     changeset = User.changeset(user, :update, user_params)
 
@@ -64,7 +62,7 @@ defmodule CedaRealty.Admin.UserController do
   end
 
   def delete(conn, %{"id" => id}) do
-    user = Repo.get(User, id)
+    user = conn.assigns.loaded_resource
 
     Repo.delete(user)
 
