@@ -33,7 +33,8 @@ defmodule CedaRealty.Mixfile do
      {:postgrex, ">= 0.0.0"},
      {:phoenix_live_reload, "~> 0.3"},
      {:cowboy, "~> 1.0"},
-     {:canary, "~> 0.4.0"},
-     {:comeonin, "~> 0.8" }]
+     {:canary, "~> 0.6.0"},
+     {:comeonin, "~> 0.8"},
+     {:exseed, "~> 0.0.1"}]
   end
 end

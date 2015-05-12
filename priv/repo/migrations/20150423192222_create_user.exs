@@ -18,5 +18,9 @@ defmodule CedaRealty.Repo.Migrations.CreateUser do
 
       timestamps
     end
+
+    create index(:users, [:username], unique: true)
+    create index(:users, [:email], unique: true)
+    create index(:users, [:reset_password_token], unique: true)
   end
 end
