@@ -15,5 +15,5 @@ config :ceda_realty, CedaRealty.Repo,
   username: "postgres",
   password: "postgres",
   database: "ceda_realty_test",
-  size: 1,
-  max_overflow: false
+  pool: Ecto.Adapters.SQL.Sandbox, # Use a sandbox for transactional testing
+  size: 1

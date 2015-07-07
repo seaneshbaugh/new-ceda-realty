@@ -21,7 +21,7 @@ defmodule CedaRealty.User do
     timestamps
   end
 
-  def changeset(model, action, params \\ nil) do
+  def changeset(model, action, params \\ :empty) do
     model
     |> cast(params, required_fields_for(action), optional_fields_for(action))
     |> validate_password_confirmation

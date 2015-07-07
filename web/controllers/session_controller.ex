@@ -2,8 +2,6 @@ defmodule CedaRealty.SessionController do
   use CedaRealty.Web, :controller
   import Comeonin.Bcrypt
 
-  plug :action
-
   def new(conn, _params) do
     render conn, "new.html"
   end

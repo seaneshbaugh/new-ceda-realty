@@ -8,9 +8,9 @@ use Mix.Config
 # Configures the endpoint
 config :ceda_realty, CedaRealty.Endpoint,
   url: [host: "localhost"],
-  root: Path.expand("..", __DIR__),
+  root: Path.dirname(__DIR__),
   secret_key_base: "YhsC4/1tATgxx23fcni1vr026uJQ0ZlLbmykbHQA5wq4YbgPdXxScus3fyhTGXtw",
-  debug_errors: false,
+  render_errors: [default_format: "html"],
   pubsub: [name: CedaRealty.PubSub,
            adapter: Phoenix.PubSub.PG2],
   remember_me: [key: "_remember_me_token",

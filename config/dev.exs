@@ -31,4 +31,5 @@ config :ceda_realty, CedaRealty.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "sean_eshbaugh",
   password: "",
-  database: "ceda_realty_dev"
+  database: "ceda_realty_dev",
+  size: 10 # The amount of database connections in the pool

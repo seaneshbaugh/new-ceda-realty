@@ -1,5 +1,5 @@
 defmodule CedaRealty.Router do
-  use Phoenix.Router
+  use CedaRealty.Web, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -25,6 +25,7 @@ defmodule CedaRealty.Router do
   scope "/admin", CedaRealty.Admin, as: :admin do
     pipe_through :browser # Use the default browser stack
 
+    resources "/pages", PageController
     resources "/users", UserController
   end
 
