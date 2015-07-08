@@ -7,6 +7,7 @@ defmodule CedaRealty.Admin.PageController do
   plug :scrub_params, "page" when action in [:create, :update]
   plug :load_and_authorize_resource, model: Page
   plug CedaRealty.Plugs.RequireAuthorization
+  plug :put_layout, "admin.html"
 
   def index(conn, _params) do
     render conn, "index.html", pages: conn.assigns.pages

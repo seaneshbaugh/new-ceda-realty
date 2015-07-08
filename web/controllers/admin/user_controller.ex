@@ -7,6 +7,7 @@ defmodule CedaRealty.Admin.UserController do
   plug :scrub_params, "user" when action in [:create, :update]
   plug :load_and_authorize_resource, model: User
   plug CedaRealty.Plugs.RequireAuthorization
+  plug :put_layout, "admin.html"
 
   def index(conn, _params) do
     render conn, "index.html", users: conn.assigns.users
