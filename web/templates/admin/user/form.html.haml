@@ -1,0 +1,32 @@
+= form_for @changeset, @action, fn f ->
+  - if f.errors != [] do
+    .alert.alert-danger
+      %p Oops, something went wrong! Please check the errors below:
+      %ul
+        - for {attr, message} <- f.errors do
+          %li= humanize(attr) <> " " <> message
+  .form-group
+    %label{ for: "user[username]" }
+      Username
+    = text_input f, :username, class: "form-control"
+  .form-group
+    %label{ for: "user[email]" }
+      Email
+    = email_input f, :email, class: "form-control"
+  .form-group
+    %label{ for: "user[password]" }
+      Password
+    = password_input f, :password, class: "form-control"
+  .form-group
+    %label{ for: "user[password_confirmation]" }
+      Password Confirmation
+    = password_input f, :password_confirmation, class: "form-control"
+  .form-group
+    %label{ for: "user[role]" }
+      Role
+    = select f, :role, ["Read Only": "read_only", "Agent": "agent", "Manager": "manager", "Admin": "admin", "Sysadmin": "sysadmin"], class: "form-control"
+  .form-group
+    = submit "Submit", class: "btn btn-primary"
+    &nbsp;
+    = link "Cancel", to: admin_page_path(@conn, :index), class: "btn btn-default"
+- end

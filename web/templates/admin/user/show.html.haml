@@ -1,0 +1,56 @@
+%h2.page-heading= @user.username
+#page
+  .row.user-username
+    .col-xs-12.col-sm-2
+      %strong Username:
+    .col-xs-12.col-sm-10
+      = @user.username
+  .row.user-email
+    .col-xs-12.col-sm-2
+      %strong Email:
+    .col-xs-12.col-sm-10
+      = @user.email
+  .row.user-role
+    .col-xs-12.col-sm-2
+      %strong Role:
+    .col-xs-12.col-sm-10
+      = @user.role
+  .row.user-sign-in-count
+    .col-xs-12.col-sm-2
+      %strong Sign In Count:
+    .col-xs-12.col-sm-2
+      = @user.sign_in_count
+  .row.user-current-sign-in-at
+    .col-xs-12.col-sm-2
+      %strong Current Sign In At:
+    .col-xs-12.col-sm-10
+      = @user.current_sign_in_at
+  .row.user-last_sign_in_at
+    .col-xs-12.col-sm-2
+      %strong Last Sign In At:
+    .col-xs-12.col-sm-10
+      = @user.last_sign_in_at
+  .row.user-current-sign-in-ip
+    .col-xs-12.col-sm-2
+      %strong Current Sign In IP:
+    .col-xs-12.col-sm-10
+      = @user.current_sign_in_ip
+  .row.user-last-sign-in-ip
+    .col-xs-12.col-sm-2
+      %strong Last Sign In IP:
+    .col-xs-12.col-sm-10
+      = @user.last_sign_in_ip
+  .row.user-inserted-at
+    .col-xs-12.col-sm-2
+      %strong Inserted At:
+    .col-xs-12.col-sm-10
+      = @user.inserted_at
+  .row.user-updated-at
+    .col-xs-12.col-sm-2
+      %strong Updated At:
+    .col-xs-12.col-sm-10
+      = @user.updated_at
+  .action-buttons-container
+    = link "Edit", to: admin_user_path(@conn, :edit, @user), class: "btn btn-primary"
+    &nbsp;
+    = link "Delete", to: admin_user_path(@conn, :delete, @user), method: :delete, class: "btn btn-danger"

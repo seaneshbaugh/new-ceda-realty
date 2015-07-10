@@ -16,7 +16,7 @@ defmodule CedaRealty.Admin.PageController do
   def new(conn, _params) do
     changeset = Page.changeset(%Page{}, :create)
 
-    render conn, "new.html", changeset: changeset
+    render conn, "new.html", changeset: changeset, pages: CedaRealty.Repo.all(CedaRealty.Page)
   end
 
   def create(conn, %{"page" => page_params}) do
@@ -34,7 +34,7 @@ defmodule CedaRealty.Admin.PageController do
   end
 
   def show(conn, %{"id" => id}) do
-    render conn, "show.html", page: conn.assigns.page
+    render conn, "show.html", page: conn.assigns.page |> CedaRealty.Repo.preload(:parent)
   end
 
   def edit(conn, %{"id" => id}) do
@@ -42,7 +42,7 @@ defmodule CedaRealty.Admin.PageController do
 
     changeset = Page.changeset(page, :update)
 
-    render conn, "edit.html", page: page, changeset: changeset
+    render conn, "edit.html", page: page, changeset: changeset, pages: CedaRealty.Repo.all(CedaRealty.Page)
   end
 
   def update(conn, %{"id" => id, "page" => page_params}) do

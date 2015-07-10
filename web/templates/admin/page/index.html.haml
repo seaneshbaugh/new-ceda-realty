@@ -1,0 +1,19 @@
+%h2.page-header Pages
+= link "New Page", to: admin_page_path(@conn, :new), class: "btn btn-primary pull-right"
+#pages
+  .table-responsive
+    %table.table.table-condensed.table-hover.table-striped
+      %thead
+        %tr.row
+          %th.col-xs-9 Title
+          %th.col-xs-3 &nbsp;
+      %tbody.list
+        - for page <- @pages do
+          %tr.row
+            %td.col-xs-9.title
+              = link page.title, to: admin_page_path(@conn, :show, page)
+            %td.col-xs-3.text-right.actions
+              = link "Edit", to: admin_page_path(@conn, :edit, page), class: "btn btn-default btn-xs"
+              &nbsp;
+              = link "Delete", to: admin_page_path(@conn, :delete, page), method: :delete, class: "btn btn-danger btn-xs"
+= link "New Page", to: admin_page_path(@conn, :new), class: "btn btn-primary pull-right"

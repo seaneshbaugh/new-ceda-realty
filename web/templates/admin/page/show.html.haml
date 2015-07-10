@@ -1,0 +1,74 @@
+%h2.page-heading= @page.title
+#page
+  .row.page-title
+    .col-xs-12.col-sm-2
+      %strong Title:
+    .col-xs-12.col-sm-10
+      = @page.title
+  .row.page-slug
+    .col-xs-12.col-sm-2
+      %strong Slug:
+    .col-xs-12.col-sm-10
+      = @page.slug
+  .row.page-full-path
+    .col-xs-12.col-sm-2
+      %strong Full Path:
+    .col-xs-12.col-sm-10
+      = @page.full_path
+  .row.page-parent
+    .col-xs-12.col-sm-2
+      %strong Parent Page:
+    .col-xs-12.col-sm-2
+      = parent(@page, @conn)
+  .row.page-body
+    .col-xs-12.col-sm-2
+      %strong Body:
+    .col-xs-12.col-sm-10
+      %pre
+        = @page.body
+  .row.page-style
+    .col-xs-12.col-sm-2
+      %strong Style:
+    .col-xs-12.col-sm-10
+      %pre
+        = @page.style
+  .row.page-script
+    .col-xs-12.col-sm-2
+      %strong Script:
+    .col-xs-12.col-sm-10
+      %pre
+        = @page.script
+  .row.page-meta-description
+    .col-xs-12.col-sm-2
+      %strong Meta Description:
+    .col-xs-12.col-sm-10
+      = @page.meta_description
+  .row.page-show-in-menu
+    .col-xs-12.col-sm-2
+      %strong Show in Menu:
+    .col-xs-12.col-sm-10
+      = show_in_menu(@page)
+  .row.page-published
+    .col-xs-12.col-sm-2
+      %strong Published:
+    .col-xs-12.col-sm-10
+      = published(@page)
+  .row.page-order
+    .col-xs-12.col-sm-2
+      %strong Order:
+    .col-xs-12.col-sm-10
+      = @page.order
+  .row.page-inserted-at
+    .col-xs-12.col-sm-2
+      %strong Inserted At:
+    .col-xs-12.col-sm-10
+      = @page.inserted_at
+  .row.page-updated-at
+    .col-xs-12.col-sm-2
+      %strong Updated At:
+    .col-xs-12.col-sm-10
+      = @page.updated_at
+  .action-buttons-container
+    = link "Edit", to: admin_page_path(@conn, :edit, @page), class: "btn btn-primary"
+    &nbsp;
+    = link "Delete", to: admin_page_path(@conn, :delete, @page), method: :delete, class: "btn btn-danger"

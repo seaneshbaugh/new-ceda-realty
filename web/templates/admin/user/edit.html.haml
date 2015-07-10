@@ -1,0 +1,2 @@
+%h2.page-header Edit User
+= render "form.html", conn: @conn, changeset: @changeset, action: admin_user_path(@conn, :update, @user)

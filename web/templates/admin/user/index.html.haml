@@ -1,0 +1,25 @@
+%h2.page-header Users
+= link "New User", to: admin_user_path(@conn, :new), class: "btn btn-primary pull-right"
+#pages
+  .table-responsive
+    %table.table.table-condensed.table-hover.table-striped
+      %thead
+        %tr.row
+          %th.col-xs-4 Username
+          %th.col-xs-4 Email
+          %th.col-xs-1 Role
+          %th.col-xs-3 &nbsp;
+      %tbody.list
+        - for user <- @users do
+          %tr.row
+            %td.col-xs-4.username
+              = link user.username, to: admin_user_path(@conn, :show, user)
+            %td.col-xs-4.email
+              = user.email
+            %td.col-xs-1.role
+              = user.role
+            %td.col-xs-3.text-right.actions
+              = link "Edit", to: admin_user_path(@conn, :edit, user), class: "btn btn-default btn-xs"
+              &nbsp;
+              = link "Delete", to: admin_user_path(@conn, :delete, user), method: :delete, class: "btn btn-danger btn-xs"
+= link "New User", to: admin_user_path(@conn, :new), class: "btn btn-primary pull-right"
