@@ -17,6 +17,8 @@ defmodule CedaRealty.Router do
 
     get "/", PageController, :index
 
+    get "/blog", PostController, :index
+
     get "/login", SessionController, :new
     post "/login", SessionController, :create
     delete "/logout", SessionController, :delete
@@ -26,6 +28,7 @@ defmodule CedaRealty.Router do
     pipe_through :browser # Use the default browser stack
 
     resources "/pages", PageController
+    resources "/posts", PostController
     resources "/users", UserController
   end
 

@@ -14,7 +14,7 @@ defmodule CedaRealty.Admin.PageController do
   end
 
   def new(conn, _params) do
-    changeset = Page.changeset(%Page{}, :create)
+    changeset = Page.changeset(%Page{}, :new)
 
     render conn, "new.html", changeset: changeset, pages: CedaRealty.Repo.all(CedaRealty.Page)
   end

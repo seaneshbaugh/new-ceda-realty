@@ -1,0 +1,6 @@
+%h2.page-header Blog Posts
+#posts
+  - for post <- @posts do
+    .post
+      %h3.post-title= post.title
+      .post-body= safe(post.body)
