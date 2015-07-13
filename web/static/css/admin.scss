@@ -3,3 +3,11 @@
 .action-buttons-container {
     margin-top: 10px;
 }
+
+#pictures {
+    .preview {
+        img {
+            max-width: 100px;
+        }
+    }
+}

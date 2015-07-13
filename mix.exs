@@ -39,6 +39,7 @@ defmodule CedaRealty.Mixfile do
      {:canary, "~> 0.8.0"},
      {:comeonin, "~> 1.0"},
      {:exseed, "~> 0.0.1"},
+     {:mogrify, "~> 0.1"},
      {:inflex, "~> 1.3.0"}]
   end
 end

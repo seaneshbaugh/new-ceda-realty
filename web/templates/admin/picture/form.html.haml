@@ -1,0 +1,16 @@
+= form_for @changeset, @action, [multipart: true], fn f ->
+  - if f.errors != [] do
+    .alert.alert-danger
+      %p Oops, something went wrong! Please check the errors below:
+      %ul
+        - for {attr, message} <- f.errors do
+          %li= humanize(attr) <> " " <> message
+  .form-group
+    %label{ for: "picture[file]" }
+      File:
+    = file_input f, :file, class: "form-control"
+  .form-group
+    = submit "Submit", class: "btn btn-primary"
+    &nbsp;
+    = link "Cancel", to: admin_picture_path(@conn, :index), class: "btn btn-default"
+- end

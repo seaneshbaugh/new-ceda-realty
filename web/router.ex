@@ -28,6 +28,7 @@ defmodule CedaRealty.Router do
     pipe_through :browser # Use the default browser stack
 
     resources "/pages", PageController
+    resources "/pictures", PictureController, except: [:edit, :update]
     resources "/posts", PostController
     resources "/users", UserController
   end

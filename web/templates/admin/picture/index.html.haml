@@ -1,0 +1,17 @@
+%h2.picture-header Pictures
+= link "New Picture", to: admin_picture_path(@conn, :new), class: "btn btn-primary pull-right"
+#pictures
+  .table-responsive
+    %table.table.table-condensed.table-hover.table-striped
+      %thead
+        %tr.row
+          %th.col-xs-9 Preview
+          %th.col-xs-3 &nbsp;
+      %tbody.list
+        - for picture <- @pictures do
+          %tr.row
+            %td.col-xs-9.preview
+              = link safe("<img src=\"#{picture_file_thumbnail_path(picture)}\">"), to: admin_picture_path(@conn, :show, picture)
+            %td.col-xs-3.text-right.actions
+              = link "Delete", to: admin_picture_path(@conn, :delete, picture), method: :delete, class: "btn btn-danger btn-xs"
+= link "New Picture", to: admin_picture_path(@conn, :new), class: "btn btn-primary pull-right"

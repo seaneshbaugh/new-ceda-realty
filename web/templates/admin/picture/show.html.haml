@@ -1,0 +1,34 @@
+%h2.page-heading= @picture.file_original_file_name
+#page
+  .row.picture-preview
+    .col-xs-12.col-sm-2
+      %strong Preview:
+    .col-xs-12.col-sm-10
+      = link safe("<img src=\"#{picture_file_thumbnail_path(@picture)}\">"), to: picture_file_path(@picture)
+  .row.picture-file-size
+    .col-xs-12.col-sm-2
+      %strong File Size:
+    .col-xs-12.col-sm-10
+      = @picture.file_size
+  .row.picture-file-content-type
+    .col-xs-12.col-sm-2
+      %strong File Content Type:
+    .col-xs-12.col-sm-10
+      = @picture.file_content_type
+  .row.picture-file-checksum
+    .col-xs-12.col-sm-2
+      %strong SHA512 Checksum:
+    .col-xs-12.col-sm-10{ style: "word-break: break-all;" }
+      = @picture.file_checksum
+  .row.picture-inserted-at
+    .col-xs-12.col-sm-2
+      %strong Inserted At:
+    .col-xs-12.col-sm-10
+      = @picture.inserted_at
+  .row.picture-updated-at
+    .col-xs-12.col-sm-2
+      %strong Updated At:
+    .col-xs-12.col-sm-10
+      = @picture.updated_at
+  .action-buttons-container
+    = link "Delete", to: admin_picture_path(@conn, :delete, @picture), method: :delete, class: "btn btn-danger"
