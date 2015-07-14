@@ -1,7 +1,7 @@
 defimpl Canada.Can, for: CedaRealty.User do
   alias CedaRealty.User
 
-  def can?(%User{role: "agent"}, _, _) do
+  def can?(%User{role: "agent"}, _action, _resource) do
     false
   end
 
@@ -21,7 +21,7 @@ defimpl Canada.Can, for: CedaRealty.User do
     true
   end
 
-  def can?(%User{role: "manager"}, _, _) do
+  def can?(%User{role: "manager"},  _action, _resource) do
     false
   end
 
@@ -41,18 +41,11 @@ defimpl Canada.Can, for: CedaRealty.User do
     true
   end
 
-  def can?(%User{role: "admin"}, _, _) do
+  def can?(%User{role: "admin"}, _action, _resource) do
     false
   end
 
-  def can?(%User{role: "sysadmin"} = u, a, r) do
-    IO.puts "*****************************************************************************************"
-    IO.puts "can?"
-    IO.inspect u
-    IO.inspect a
-    IO.inspect r
-    IO.puts "*****************************************************************************************"
-
+  def can?(%User{role: "sysadmin"} = _user, _action, _resource) do
     true
   end
 end

@@ -27,6 +27,7 @@ defmodule CedaRealty.Router do
   scope "/admin", CedaRealty.Admin, as: :admin do
     pipe_through :browser # Use the default browser stack
 
+    resources "/documents", DocumentController
     resources "/pages", PageController
     resources "/pictures", PictureController, except: [:edit, :update]
     resources "/posts", PostController
