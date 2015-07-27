@@ -11,7 +11,6 @@ defmodule CedaRealty.Repo.Migrations.CreatePage do
       add :style, :text, null: false, default: ""
       add :script, :text, null: false, default: ""
       add :meta_description, :text, null: false, default: ""
-      add :meta_keywords, :text, null: false, default: ""
       add :show_in_menu, :boolean, null: false, default: true
       add :published, :boolean,  null: false, default: true
       add :order, :integer, null: false, default: 0
@@ -20,7 +19,7 @@ defmodule CedaRealty.Repo.Migrations.CreatePage do
     end
 
     create index(:pages, [:parent_id])
-    create index(:pages, [:slug])
+    create index(:pages, [:slug], unique: true)
     create index(:pages, [:full_path], unique: true)
     create index(:pages, [:show_in_menu])
     create index(:pages, [:published])

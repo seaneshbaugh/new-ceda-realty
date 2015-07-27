@@ -1,0 +1,72 @@
+= form_for @changeset, @action, [multipart: true], fn f ->
+  - if f.errors != [] do
+    .alert.alert-danger
+      %p Oops, something went wrong! Please check the errors below:
+      %ul
+        - for {attr, message} <- f.errors do
+          %li= humanize(attr) <> " " <> message
+  .form-group
+    %label{ for: "office[name]" }
+      Name:
+    = text_input f, :name, class: "form-control"
+  .form-group
+    %label{ for: "office[picture]" }
+      Picture:
+    = file_input f, :picture, class: "form-control"
+  .form-group
+    %label{ for: "office[street_address_1]" }
+      Street Address 1:
+    = text_input f, :street_address_1, class: "form-control"
+  .form-group
+    %label{ for: "office[street_address_2]" }
+      Street Address 2:
+    = text_input f, :street_address_2, class: "form-control"
+  .form-group
+    %label{ for: "office[city]" }
+      City:
+    = text_input f, :city, class: "form-control"
+  .form-group
+    %label{ for: "office[state]" }
+      State:
+    = text_input f, :state, class: "form-control"
+  .form-group
+    %label{ for: "office[zipcode]" }
+      Zipcode:
+    = text_input f, :zipcode, class: "form-control"
+  .form-group
+    %label{ for: "office[phone_number]" }
+      Phone Number:
+    = text_input f, :phone_number, class: "form-control"
+  .form-group
+    %label{ for: "office[fax_number]" }
+      Fax Number:
+    = text_input f, :fax_number, class: "form-control"
+  .form-group
+    %label{ for: "office[description_body]" }
+      Description Body:
+    = textarea f, :description_body, class: "form-control"
+  .form-group
+    %label{ for: "office[description_style]" }
+      Description Style:
+    = textarea f, :description_style, class: "form-control"
+  .form-group
+    %label{ for: "office[description_script]" }
+      Description Script:
+    = textarea f, :description_script, class: "form-control"
+  .form-group
+    %label{ for: "office[meta_description]" }
+      Meta Description:
+    = textarea f, :meta_desription, class: "form-control"
+  .form-group
+    %label{ for: "office[google_maps_uri]" }
+      Google Maps URI:
+    = text_input f, :google_maps_uri, class: "form-control"
+  .checkbox
+    %label{ for: "office[visible]" }
+      = checkbox f, :visible
+      &nbsp; Visible
+  .form-group
+    = submit "Submit", class: "btn btn-primary"
+    &nbsp;
+    = link "Cancel", to: admin_office_path(@conn, :index), class: "btn btn-default"
+- end

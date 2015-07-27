@@ -1,0 +1,13 @@
+%h2 CEDA Realty Admin Panel
+%section#quick-links.row
+  %h3.col-xs-12 Quick Links
+  .col-xs-6.col-md-3
+    = link "New Document", to: admin_document_path(@conn, :new)
+  .col-xs-6.col-md-3
+    = link "New Page", to: admin_page_path(@conn, :new)
+  .col-xs-6.col-md-3
+    = link "New Picture", to: admin_picture_path(@conn, :new)
+  .col-xs-6.col-md-3
+    = link "New Post", to: admin_post_path(@conn, :new)
+  .col-xs-6.col-md-3
+    = link "New User", to: admin_user_path(@conn, :new)

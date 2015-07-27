@@ -16,7 +16,7 @@ defmodule CedaRealty.Repo.Migrations.CreatePost do
     end
 
     create index(:posts, [:user_id])
-    create index(:posts, [:slug])
+    create index(:posts, [:slug], unique: true)
     create index(:posts, [:published])
   end
 end

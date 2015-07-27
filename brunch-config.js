@@ -2,7 +2,9 @@ exports.config = {
   // See http://brunch.io/#documentation for docs.
   files: {
     javascripts: {
-      joinTo: 'js/app.js'
+        joinTo: {
+            'js/app.js': /^(web\/static\/js)|(web\/static\/vendor\/js)/
+        },
       // To use a separate vendor.js bundle, specify two files path
       // https://github.com/brunch/brunch/blob/stable/docs/config.md#files
       // joinTo: {
@@ -12,17 +14,19 @@ exports.config = {
       //
       // To change the order of concatenation of files, explictly mention here
       // https://github.com/brunch/brunch/tree/master/docs#concatenation
-      // order: {
-      //   before: [
-      //     'web/static/vendor/js/jquery-2.1.1.js',
-      //     'web/static/vendor/js/bootstrap.min.js'
-      //   ]
-      // }
+        order: {
+            before: [
+                'web/static/vendor/js/jquery-2.1.4.min.js',
+                'web/static/vendor/js/bootstrap.min.js',
+                'web/static/vendor/js/phoenix.js'
+            ]
+        }
     },
     stylesheets: {
         joinTo: {
             'css/app.css': /^(web\/static\/css\/app)/,
-            'css/admin.css': /^(web\/static\/css\/admin)/
+            'css/admin.css': /^(web\/static\/css\/admin)/,
+            'css/agents.css': /^(web\/static\/css\/agents)/
         }
     },
     templates: {

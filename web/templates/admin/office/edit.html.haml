@@ -1,0 +1,2 @@
+%h2.page-header Edit Office
+= render "form.html", conn: @conn, changeset: @changeset, action: admin_office_path(@conn, :update, @office)

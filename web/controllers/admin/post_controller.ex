@@ -14,7 +14,7 @@ defmodule CedaRealty.Admin.PostController do
   end
 
   def new(conn, _params) do
-    changeset = Post.changeset(%Post{}, :new)
+    changeset = Post.changeset(%Post{}, :create)
 
     render conn, "new.html", changeset: changeset
   end
@@ -33,11 +33,11 @@ defmodule CedaRealty.Admin.PostController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
+  def show(conn, _params) do
     render conn, "show.html", post: conn.assigns.post |> CedaRealty.Repo.preload(:user)
   end
 
-  def edit(conn, %{"id" => id}) do
+  def edit(conn, _params) do
     post = conn.assigns.post
 
     changeset = Post.changeset(post, :update)
@@ -45,7 +45,7 @@ defmodule CedaRealty.Admin.PostController do
     render conn, "edit.html", post: post, changeset: changeset
   end
 
-  def update(conn, %{"id" => id, "post" => post_params}) do
+  def update(conn, %{"post" => post_params}) do
     post = conn.assigns.post
 
     changeset = Post.changeset(post, :update, post_params)
@@ -61,7 +61,7 @@ defmodule CedaRealty.Admin.PostController do
     end
   end
 
-  def delete(conn, %{"id" => id}) do
+  def delete(conn, _params) do
     post = conn.assigns.post
 
     Repo.delete(post)

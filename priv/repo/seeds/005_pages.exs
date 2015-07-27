@@ -21,8 +21,6 @@ seed CedaRealty.Page do
 
   meta_description ""
 
-  meta_keywords ""
-
   show_in_menu true
 
   published true
@@ -51,13 +49,9 @@ seed CedaRealty.Page do
 
   meta_description ""
 
-  meta_keywords ""
-
   show_in_menu true
 
   published true
 
   order page_id - 1
 end
-
-page_id = page_id + 1

@@ -1,19 +1,17 @@
 defmodule CedaRealty.Page do
   use CedaRealty.Web, :model
-  import CedaRealty.Concerns.DefaultValues
 
   schema "pages" do
-    field :title, :string
-    field :slug, :string
-    field :full_path, :string
-    field :body, :string
-    field :style, :string
-    field :script, :string
-    field :meta_description, :string
-    field :meta_keywords, :string
-    field :show_in_menu, :boolean
-    field :published, :boolean
-    field :order, :integer
+    field :title, :string, default: ""
+    field :slug, :string, default: ""
+    field :full_path, :string, default: ""
+    field :body, :string, default: ""
+    field :style, :string, default: ""
+    field :script, :string, default: ""
+    field :meta_description, :string, default: ""
+    field :show_in_menu, :boolean, default: true
+    field :published, :boolean, default: true
+    field :order, :integer, default: 0
 
     belongs_to :parent, CedaRealty.Page
     has_many :children, CedaRealty.Page, on_delete: :delete_all
@@ -31,7 +29,6 @@ defmodule CedaRealty.Page do
   def changeset(model, action, params) do
     model
     |> cast(params, required_fields_for(action), optional_fields_for(action))
-    |> set_default_values(default_attributes)
     |> set_slug
     |> set_full_path
     |> validate_length(:title, min: 3)
@@ -52,23 +49,6 @@ defmodule CedaRealty.Page do
 
   defp optional_fields_for(:update) do
     ~w(style script meta_description parent_id)
-  end
-
-  defp default_attributes do
-    [
-      title: "",
-      slug: "",
-      full_path: "",
-      body: "",
-      style: "",
-      script: "",
-      meta_description: "",
-      meta_keywords: "",
-      show_in_menu: true,
-      published: true,
-      order: 0,
-      parent_id: nil
-    ]
   end
 
   defp set_slug(changeset) do

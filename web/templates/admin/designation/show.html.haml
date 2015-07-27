@@ -1,0 +1,47 @@
+%h2.page-header= @designation.name
+#designation
+  .row.designation-name
+    .col-xs-12.col-sm-2
+      %strong Name:
+    .col-xs-12.col-sm-10
+      = @designation.name
+  .row.designation-slug
+    .col-xs-12.col-sm-2
+      %strong Slug:
+    .col-xs-12.col-sm-10
+      = @designation.slug
+  .row.designation-logo
+    .col-xs-12.col-sm-2
+      %strong Logo:
+    .col-xs-12.col-sm-10
+      - img_src = designation_logo_path(@designation)
+        %img{ src: img_src }
+  .row.designation-abbreviation
+    .col-xs-12.col-sm-2
+      %strong Abbreviation:
+    .col-xs-12.col-sm-10
+      = @designation.abbreviation
+  .row.designation-description
+    .col-xs-12.col-sm-2
+      %strong Description:
+    .col-xs-12.col-sm-10
+      = @designation.description
+  .row.designation-visible
+    .col-xs-12.col-sm-2
+      %strong Visible:
+    .col-xs-12.col-sm-10
+      = visible(@designation)
+  .row.designation-inserted-at
+    .col-xs-12.col-sm-2
+      %strong Inserted At:
+    .col-xs-12.col-sm-10
+      = @designation.inserted_at
+  .row.designation-updated-at
+    .col-xs-12.col-sm-2
+      %strong Updated At:
+    .col-xs-12.col-sm-10
+      = @designation.updated_at
+  .action-buttons-container
+    = link "Edit", to: admin_designation_path(@conn, :edit, @designation), class: "btn btn-primary"
+    &nbsp;
+    = link "Delete", to: admin_designation_path(@conn, :delete, @designation), method: :delete, class: "btn btn-danger"

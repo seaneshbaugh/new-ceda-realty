@@ -14,7 +14,7 @@ defmodule CedaRealty.Admin.DocumentController do
   end
 
   def new(conn, _params) do
-    changeset = Document.changeset(%Document{}, :new)
+    changeset = Document.changeset(%Document{}, :create)
 
     render conn, "new.html", changeset: changeset
   end
@@ -22,16 +22,12 @@ defmodule CedaRealty.Admin.DocumentController do
   def create(conn, %{"document" => document_params}) do
     changeset = Document.changeset(%Document{}, :create, document_params)
 
+#    IO.inspect document_params
+
     if changeset.valid? do
       Repo.insert!(changeset)
 
-      documents_path = Path.expand("./priv/static/system/documents")
-
-      File.mkdir_p!(documents_path)
-
-      document_path = Path.join(documents_path, Ecto.Changeset.get_field(changeset, :file_path))
-
-      File.cp!(document_params["file"].path, document_path)
+      Document.save_file!(changeset, document_params)
 
       conn
       |> put_flash(:info, "Document created successfully.")
@@ -45,14 +41,34 @@ defmodule CedaRealty.Admin.DocumentController do
     render conn, "show.html", document: conn.assigns.document
   end
 
+  def edit(conn, _params) do
+    changeset = Document.changeset(conn.assigns.document, :update)
+
+    render conn, "edit.html", document: conn.assigns.document, changeset: changeset
+  end
+
+  def update(conn, %{"document" => document_params}) do
+    changeset = Document.changeset(conn.assigns.document, :update, document_params)
+
+    if changeset.valid? do
+      Repo.update!(changeset)
+
+      Document.replace_file!(changeset, document_params)
+
+      conn
+      |> put_flash(:info, "Document updated successfully.")
+      |> redirect(to: admin_document_path(conn, :index))
+    else
+      render conn, "edit.html", document: conn.assigns.document, changeset: changeset
+    end
+  end
+
   def delete(conn, %{"id" => _id}) do
     document = conn.assigns.document
 
-    Repo.delete(document)
+    Repo.delete!(document)
 
-    document_path = Path.join(Path.expand("./priv/static/system/documents"), document.file_path)
-
-    File.rm!(document_path)
+    Document.delete_file!(document)
 
     conn
     |> put_flash(:info, "Document deleted successfully.")

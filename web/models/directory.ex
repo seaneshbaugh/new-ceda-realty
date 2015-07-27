@@ -1,15 +1,14 @@
 defmodule CedaRealty.Directory do
   use CedaRealty.Web, :model
-  import CedaRealty.Concerns.DefaultValues
 
   schema "directories" do
-    field :name, :string
-    field :slug, :string
-    field :full_path, :string
+    field :name, :string, default: ""
+    field :slug, :string, default: ""
+    field :full_path, :string, default: ""
 
     belongs_to :parent, CedaRealty.Directory
     belongs_to :user, CedaRealty.User
-    # belongs_to :office, CedaRealty.Office
+    belongs_to :office, CedaRealty.Office
     has_many :children, CedaRealty.Directory, on_delete: :delete_all
     has_many :documents, CedaRealty.Directory, on_delete: :delete_all
 
@@ -26,7 +25,6 @@ defmodule CedaRealty.Directory do
   def changeset(model, action, params) do
     model
     |> cast(params, required_fields_for(action), optional_fields_for(action))
-    |> set_default_values(default_attributes)
     |> set_slug
     |> set_full_path
     |> validate_length(:name, min: 3)
@@ -42,22 +40,11 @@ defmodule CedaRealty.Directory do
   end
 
   defp optional_fields_for(:create) do
-    ~w()
+    ~w(parent_id user_id office_id)
   end
 
   defp optional_fields_for(:update) do
     ~w()
-  end
-
-  defp default_attributes do
-    [
-      name: "",
-      slug: "",
-      full_path: "",
-      parent_id: nil,
-      user_id: nil,
-      office_id: nil
-    ]
   end
 
   defp set_slug(changeset) do

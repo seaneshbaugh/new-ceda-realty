@@ -10,8 +10,8 @@ defmodule CedaRealty.Repo.Migrations.CreateDocument do
       add :slug, :string, null: false, default: ""
       add :full_path, :string, null: false, default: ""
       add :file_path, :string, null: false, default: ""
-      add :file_size, :integer,  null: false, default: 0
-      add :file_content_type, :string, null: false, default: ""
+      add :file_file_size, :integer,  null: false, default: 0
+      add :file_file_content_type, :string, null: false, default: ""
       add :file_original_file_name, :string, null: false, default: ""
       add :file_checksum, :string, null: false, default: ""
 
@@ -22,6 +22,7 @@ defmodule CedaRealty.Repo.Migrations.CreateDocument do
     create index(:documents, [:user_id])
     create index(:documents, [:office_id])
     create index(:documents, [:slug])
-    create index(:documents, [:full_path])
+    create index(:documents, [:full_path], unique: true)
+    create index(:documents, [:file_checksum])
   end
 end

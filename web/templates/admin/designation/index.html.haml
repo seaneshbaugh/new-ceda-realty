@@ -1,0 +1,22 @@
+%h2.page-header Designations
+= link "New Designation", to: admin_designation_path(@conn, :new), class: "btn btn-primary pull-right"
+#designations
+  .table-responsive
+    %table.table.table-condensed.table-hover.table-striped
+      %thead
+        %tr.row
+          %th.col-xs-9.col-sm-7 Name
+          %th.col-sm-2.hidden-xs Abbreviation
+          %th.col-xs-3 &nbsp;
+      %tbody.list
+        - for designation <- @designations do
+          %tr.row
+            %td.col-xs-9.col-sm-7.name
+              = link designation.name, to: admin_designation_path(@conn, :show, designation)
+            %td.col-sm-2.hidden-xs.abbreviation
+              = designation.abbreviation
+            %td.col-xs-3.text-right.actions
+              = link "Edit", to: admin_designation_path(@conn, :edit, designation), class: "btn btn-default btn-xs"
+              &nbsp;
+              = link "Delete", to: admin_designation_path(@conn, :delete, designation), method: :delete, class: "btn btn-danger btn-xs"
+= link "New Designation", to: admin_designation_path(@conn, :new), class: "btn btn-primary pull-right"

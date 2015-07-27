@@ -31,14 +31,14 @@ defmodule CedaRealty.Mixfile do
   defp deps do
     [{:phoenix, "~> 0.14"},
      {:phoenix_ecto, "~> 0.5"},
-     {:postgrex, ">= 0.0.0"},
+     {:postgrex, "~> 0.8.3"},
      {:phoenix_haml, "~> 0.1.2"},
      {:phoenix_html, "~> 1.1"},
      {:phoenix_live_reload, "~> 0.4", only: :dev},
      {:cowboy, "~> 1.0"},
      {:canary, "~> 0.8.0"},
      {:comeonin, "~> 1.0"},
-     {:exseed, "~> 0.0.1"},
+     {:exseed, "~> 0.0.2"},
      {:mogrify, "~> 0.1"},
      {:inflex, "~> 1.3.0"}]
   end

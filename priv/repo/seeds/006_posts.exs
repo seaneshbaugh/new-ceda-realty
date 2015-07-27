@@ -20,6 +20,4 @@ seed CedaRealty.Post do
   meta_description ""
 
   published true
-
-  order page_id - 1
 end

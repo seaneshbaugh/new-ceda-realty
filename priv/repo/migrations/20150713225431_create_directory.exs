@@ -17,6 +17,6 @@ defmodule CedaRealty.Repo.Migrations.CreateDirectory do
     create index(:directories, [:user_id])
     create index(:directories, [:office_id])
     create index(:directories, [:slug])
-    create index(:directories, [:full_path])
+    create index(:directories, [:full_path], unique: true)
   end
 end

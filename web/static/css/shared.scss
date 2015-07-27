@@ -1,0 +1,44 @@
+.alert:empty {
+    display: none;
+}
+
+form.link, form.button {
+    display: inline;
+}
+
+.navbar-default .navbar-nav > li > form > a {
+    color: #777;
+
+    &:hover, &:focus {
+        color: #333;
+        background-color: transparent;
+    }
+}
+
+.nav > li > form > a {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+
+    &:hover, &:focus {
+        text-decoration: none;
+        background-color: #eee;
+    }
+}
+
+.navbar-nav > li > form > a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    line-height: 20px;
+}
+
+#login-nav {
+    margin-top: 10px;
+}
+
+@media (min-width: 768px) {
+    .navbar-nav > li > form > a {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+}

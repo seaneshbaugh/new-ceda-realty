@@ -1,13 +1,12 @@
 defmodule CedaRealty.Picture do
   use CedaRealty.Web, :model
-  import CedaRealty.Concerns.DefaultValues
 
   schema "pictures" do
-    field :file_path, :string
-    field :file_size, :integer
-    field :file_content_type, :string
-    field :file_original_file_name, :string
-    field :file_checksum, :string
+    field :file_path, :string, default: ""
+    field :file_size, :integer, default: 0
+    field :file_content_type, :string, default: ""
+    field :file_original_file_name, :string, default: ""
+    field :file_checksum, :string, default: ""
 
     timestamps
   end

@@ -11,25 +11,29 @@
       %link{ href: "#{stylesheet_path}" rel: "stylesheet" }
   %body
     .container
-      %p.alert.alert-info= get_flash(@conn, :info)
-      %p.alert.alert-danger= get_flash(@conn, :error)
-      %nav#login-nav.navbar.navbar-default
+      %nav#main-nav.navbar.navbar-default
         .container-fluid
           .navbar-header
-            %button.navbar-toggle.collapsed{ aria-controls: "login-nav-navbar", aria-expanded: "false", data-target: "#navbar", data-toggle: "collapse", type: "button" }
+            %button.navbar-toggle.collapsed{ aria-controls: "main-navbar", aria-expanded: "false", data-target: "#main-navbar", data-toggle: "collapse", type: "button" }
               %span.sr-only Toggle navigation
               %span.icon-bar
               %span.icon-bar
               %span.icon-bar
-            - if @conn.assigns[:current_user] do
-              %span.navbar-brand
-                Hello, #{@conn.assigns[:current_user].username}
-          #login-nav-navbar.navbar-collapse.collapse
+            %span.navbar-brand
+              %a{ href: '/admin' } CEDA Realty Admin Panel
+          #main-navbar.navbar-collapse.collapse
             %ul.nav.navbar-nav
-              - if @conn.assigns[:current_user] do
-                %li= link "Log Out", to: session_path(@conn, :delete), method: :delete
-              - else
-                %li= link "Log In", to: session_path(@conn, :new)
+              %li= link "Users", to: admin_user_path(@conn, :index)
+              %li= link "Profiles", to: admin_profile_path(@conn, :index)
+              %li= link "Pages", to: admin_page_path(@conn, :index)
+              %li= link "Posts", to: admin_post_path(@conn, :index)
+              %li= link "Pictures", to: admin_picture_path(@conn, :index)
+              %li= link "Documents", to: admin_document_path(@conn, :index)
+              %li.visible-xs= link "Log Out", to: session_path(@conn, :delete), method: :delete
+            %ul.nav.navbar-nav.pull-right.hidden-xs
+              %li= link "Log Out", to: session_path(@conn, :delete), method: :delete
+      %p.alert.alert-info= get_flash(@conn, :info)
+      %p.alert.alert-danger= get_flash(@conn, :error)
       = @inner
     - script_path = static_path(@conn, "/js/app.js")
       %script{ src: "#{script_path}" }

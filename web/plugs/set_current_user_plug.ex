@@ -17,7 +17,7 @@ defmodule CedaRealty.Plugs.SetCurrentUser do
       # The user is put back in the session so changes in the database are reflected.
       conn
       |> put_session(:current_user, user)
-      |> assign(:current_user, user)
+      |> assign(:current_user, user |> CedaRealty.Repo.preload(:profile))
     else
       assign(conn, :current_user, nil)
     end

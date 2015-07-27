@@ -24,13 +24,24 @@ defmodule CedaRealty.Router do
     delete "/logout", SessionController, :delete
   end
 
+  scope "/agents", CedaRealty.Agents, as: :agent do
+    pipe_through :browser # Use the default browser stack
+
+    get "/", AgentsController, :index
+  end
+
   scope "/admin", CedaRealty.Admin, as: :admin do
     pipe_through :browser # Use the default browser stack
 
+    get "/", AdminController, :index
+
+    resources "/designations", DesignationController
     resources "/documents", DocumentController
+    resources "/offices", OfficeController
     resources "/pages", PageController
     resources "/pictures", PictureController, except: [:edit, :update]
     resources "/posts", PostController
+    resources "/profiles", ProfileController
     resources "/users", UserController
   end
 

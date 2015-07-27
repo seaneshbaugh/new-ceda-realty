@@ -1,0 +1,32 @@
+= form_for @changeset, @action, [multipart: true], fn f ->
+  - if f.errors != [] do
+    .alert.alert-danger
+      %p Oops, something went wrong! Please check the errors below:
+      %ul
+        - for {attr, message} <- f.errors do
+          %li= humanize(attr) <> " " <> message
+  .form-group
+    %label{ for: "designation[name]" }
+      Name:
+    = text_input f, :name, class: "form-control"
+  .form-group
+    %label{ for: "designation[logo]" }
+      Logo:
+    = file_input f, :logo, class: "form-control"
+  .form-group
+    %label{ for: "designation[abbreviation]" }
+      Abbreviation:
+    = text_input f, :abbreviation, class: "form-control"
+  .form-group
+    %label{ for: "designation[description]" }
+      Description:
+    = textarea f, :description, class: "form-control"
+  .checkbox
+    %label{ for: "designation[visible]" }
+      = checkbox f, :visible
+      &nbsp; Visible
+  .form-group
+    = submit "Submit", class: "btn btn-primary"
+    &nbsp;
+    = link "Cancel", to: admin_designation_path(@conn, :index), class: "btn btn-default"
+- end

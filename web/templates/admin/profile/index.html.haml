@@ -1,0 +1,19 @@
+%h2.page-header Profiles
+= link "New Profile", to: admin_profile_path(@conn, :new), class: "btn btn-primary pull-right"
+#profiles
+  .table-responsive
+    %table.table.table-condensed.table-hover.table-striped
+      %thead
+        %tr.row
+          %th.col-xs-9 Name
+          %th.col-xs-3 &nbsp;
+      %tbody.list
+        - for profile <- @profiles do
+          %tr.row
+            %td.col-xs-9.title
+              = link full_name(profile), to: admin_profile_path(@conn, :show, profile)
+            %td.col-xs-3.text-right.actions
+              = link "Edit", to: admin_profile_path(@conn, :edit, profile), class: "btn btn-default btn-xs"
+              &nbsp;
+              = link "Delete", to: admin_profile_path(@conn, :delete, profile), method: :delete, class: "btn btn-danger btn-xs"
+= link "New Profile", to: admin_profile_path(@conn, :new), class: "btn btn-primary pull-right"

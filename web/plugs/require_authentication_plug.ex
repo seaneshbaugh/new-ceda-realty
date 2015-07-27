@@ -12,6 +12,7 @@ defmodule CedaRealty.Plugs.RequireAuthentication do
     else
       conn
       |> put_flash(:error, "You must be logged in to view this page.")
+      |> put_session(:after_login_redirect_path, "/" <> Enum.join(conn.path_info, "/"))
       |> redirect(to: "/login")
       |> halt
     end

@@ -15,12 +15,14 @@ defmodule CedaRealty.SessionController do
 
     if user do
       if checkpw(password, user.encrypted_password) do
+        CedaRealty.User.changeset(user, :login, conn) |> Repo.update
+
         conn
         |> fetch_session
         |> put_session(:current_user, user)
         |> remember_me(params)
         |> put_flash(:info, "Successfully logged in.")
-        |> redirect(to: page_path(conn, :index))
+        |> redirect(to: get_session(conn, :after_login_redirect_path) || page_path(conn, :index))
       else
         conn
         |> put_flash(:error, "Invalid username or password.")

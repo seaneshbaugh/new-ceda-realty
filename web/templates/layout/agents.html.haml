@@ -1,0 +1,37 @@
+!!! 5
+%html{ lang: "en-US" }
+  %head
+    %meta{ charset: "utf-8" }
+    %meta{ content: "IE=edge", http-equiv: "X-UA-Compatible" }
+    %title CEDA Realty Agent Panel
+    %meta{ content: "width=device-width, initial-scale=1", name: "viewport" }
+    %meta{ content: "CEDA Realty, reinventing the real estate experience!", name: "description" }
+    %meta{ content: "CEDA Realty", name: "author" }
+    - stylesheet_path = static_path(@conn, "/css/agents.css")
+      %link{ href: "#{stylesheet_path}" rel: "stylesheet" }
+  %body
+    .container
+      %p.alert.alert-info= get_flash(@conn, :info)
+      %p.alert.alert-danger= get_flash(@conn, :error)
+      %nav#login-nav.navbar.navbar-default
+        .container-fluid
+          .navbar-header
+            %button.navbar-toggle.collapsed{ aria-controls: "login-nav-navbar", aria-expanded: "false", data-target: "#navbar", data-toggle: "collapse", type: "button" }
+              %span.sr-only Toggle navigation
+              %span.icon-bar
+              %span.icon-bar
+              %span.icon-bar
+            - if @conn.assigns[:current_user] do
+              %span.navbar-brand
+                Hello, #{@conn.assigns[:current_user].username}
+          #login-nav-navbar.navbar-collapse.collapse
+            %ul.nav.navbar-nav
+              - if @conn.assigns[:current_user] do
+                %li= link "Log Out", to: session_path(@conn, :delete), method: :delete
+              - else
+                %li= link "Log In", to: session_path(@conn, :new)
+      = @inner
+    - script_path = static_path(@conn, "/js/app.js")
+      %script{ src: "#{script_path}" }
+    :javascript
+      require("web/static/js/app");
